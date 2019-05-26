@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "CSVParser.h"
 
 
@@ -10,7 +9,7 @@ CSVParser::CSVParser(std::string file, char delm)
 	std::ifstream ifile(file);
 	std::string line;
 	int i = 0;
-		
+
 	if (ifile.is_open())
 	{
 		while (ifile.good())
@@ -25,7 +24,7 @@ CSVParser::CSVParser(std::string file, char delm)
 				else
 					m_LineList.push_back(line);
 			}
-				
+
 		}
 		ifile.close();
 		CreateRecordList();
@@ -37,10 +36,10 @@ CSVParser::CSVParser(std::string file, char delm)
 
 CSVParser::~CSVParser()
 {
-	std::vector<Record *>::iterator it;
+	std::vector<Record*>::iterator it;
 
 	for (it = m_recordList.begin(); it != m_recordList.end(); it++)
-		delete *it;
+		delete* it;
 }
 
 void CSVParser::addHeaderString(std::string headerString) {
@@ -52,33 +51,40 @@ void CSVParser::addHeaderString(std::string headerString) {
 		{
 			tempString += headerString[i];
 			i++;
-		}		
+		}
 		headers.push_back(tempString);
 	}
 
 }
 
-void CSVParser::CreateRecordList() 
+void CSVParser::CreateRecordList()
 {
 
-	for (auto & element : m_LineList) {
-		Record *row = new Record(&headers);
+	for (auto& element : m_LineList) {
+		Record* row = new Record(&headers);
 		std::string temp;
+		//std::cout << element << std::endl;
 		for (int i = 0; i != element.length(); i++)
 		{
+			
 			if (element[i] != ',')
 				temp += element[i];
 			else {
 				row->insertValue(temp);
+				//std::cout << temp << " ";
 				temp = "";
 			}
 
 		}
+		row->insertValue(temp);
+		//std::cout << temp << " ";
+		temp = "";
+		//std::cout << std::endl;
 		m_recordList.push_back(row);
 	}
 }
 
-Record &CSVParser::getRow(unsigned int rowPosition) const
+Record& CSVParser::getRow(unsigned int rowPosition) const
 {
 	if (rowPosition >= 0 && rowPosition < m_recordList.size())
 		return *(m_recordList[rowPosition]);
@@ -86,7 +92,15 @@ Record &CSVParser::getRow(unsigned int rowPosition) const
 	throw CError("can't return this row (doesn't exist)");
 }
 
-Record &CSVParser::operator[](unsigned int rowPosition) const
+Record& CSVParser::operator[](unsigned int rowPosition) const
 {
 	return CSVParser::getRow(rowPosition);
+}
+
+int CSVParser::getRowCount() {
+	
+	return m_recordList.size();
+}
+int CSVParser::getColumnCount() {
+	return headers.size();
 }

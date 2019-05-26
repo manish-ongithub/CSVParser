@@ -1,7 +1,7 @@
-empid,name,type,amount
-001,amit,travel,1500,
-002,amol,food,2000,
-003,rohit,travel,2000
-001,amit,misc,1520
-002,amol,taxi,3000
-003,rohit,misc,4500
+EmpId,Name,Type,Amount
+1,amit,travel,1500
+2,amol,food,2000
+3,rohit,travel,2000
+1,amit,misc,1520
+2,amol,taxi,3000
+3,rohit,misc,4500
