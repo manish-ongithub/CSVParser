@@ -1,4 +1,3 @@
-#pragma once
 #include<vector>
 #include<string>
 #include<fstream>
@@ -42,11 +41,11 @@ public:
 	void insertValue(const std::string& value) {
 		fields.push_back(value);
 	}
-	
+
 	std::string operator[](int index) {
 		return fields[index];
 	}
-	
+
 	std::string operator[](const std::string& valueName) {
 		for (int i = 0; i < header->size(); ++i) {
 			if (header->at(i) == valueName) {
@@ -60,7 +59,7 @@ public:
 
 class CSVParser
 {
-public:
+private:
 	std::vector<std::string> headers;
 	char m_delimiter;
 	std::string m_file;
@@ -75,4 +74,7 @@ public:
 	Record& operator[](unsigned int rowPosition) const;
 	int getRowCount();
 	int getColumnCount();
+	std::vector<std::string> getHeader() {
+		return headers;
+	}
 };

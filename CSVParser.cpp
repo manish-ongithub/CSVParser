@@ -1,8 +1,5 @@
 #include "CSVParser.h"
 
-
-
-
 CSVParser::CSVParser(std::string file, char delm)
 {
 	m_delimiter = delm;
@@ -66,7 +63,7 @@ void CSVParser::CreateRecordList()
 		//std::cout << element << std::endl;
 		for (int i = 0; i != element.length(); i++)
 		{
-			
+
 			if (element[i] != ',')
 				temp += element[i];
 			else {
@@ -98,7 +95,7 @@ Record& CSVParser::operator[](unsigned int rowPosition) const
 }
 
 int CSVParser::getRowCount() {
-	
+
 	return m_recordList.size();
 }
 int CSVParser::getColumnCount() {

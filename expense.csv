@@ -1,4 +1,4 @@
-EmpId,Name,Type,Amount
+empid,name,type,amount
 1,amit,travel,1500
 2,amol,food,2000
 3,rohit,travel,2000
